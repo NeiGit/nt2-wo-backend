@@ -16,8 +16,8 @@ app.use(express.json())
 app.use(morgan('dev'))
 
 // ROUTES
-app.use('/example', RouterProvider.exampleRouter())
-
+app.use('/exercise', RouterProvider.exerciseRouter())
+app.use('/workout', RouterProvider.workoutRouter())
 
 // express error handler
 app.use((err, req, res, next) => {

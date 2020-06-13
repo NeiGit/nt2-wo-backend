@@ -1,6 +1,7 @@
-import ExampleRepo from './ingredient-repository.js'
+import ExerciseRepo from './exercise-repository.js'
+import WorkoutRepo from './workout-repository.js'
 
 export default {
-   ExampleRepo
+   ExerciseRepo, WorkoutRepo
 }
 

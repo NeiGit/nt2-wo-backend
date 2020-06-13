@@ -101,7 +101,7 @@ export class BaseRouter {
   }
 
   static getInstance(businessModel, repository, logger) {
-    return new BasicRouter(businessModel, repository, logger);
+    return new BaseRouter(businessModel, repository, logger);
   }
 }
 
