@@ -28,10 +28,11 @@ async function deleteById(_id) {
 async function update(model) {
     try {
         const workout = await find(model._id)
-        const {title} = workout
+        const {title, rounds, sets} = workout
 
         workout.title = title
-        workout.sets = workout.sets || []
+        workout.rounds = rounds
+        workout.sets = sets || []
 
 
         await workout.save()
@@ -46,11 +47,12 @@ async function update(model) {
 async function create(model) {
     try {
         const workout = new Workout()
-        const {title} = model
+        const {title, rounds, sets} = model
 
         workout.title = title
-        workout.sets = model.sets || []
-
+        workout.rounds = rounds
+        workout.sets = sets || []
+        
         await workout.save()
         return workout
     } catch (err) {

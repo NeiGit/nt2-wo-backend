@@ -6,6 +6,7 @@ export class Workout {
         validate(dto)
         if(dto._id) this._id = dto._id
         this.title = dto.title
+        this.rounds = dto.rounds
         this.sets = buildSets(dto.sets)
     }
 }
@@ -14,6 +15,7 @@ function validate(dto) {
     const schema = Joi.object({
         _id: Joi.string(),
         title: Joi.string().required(),
+        rounds: Joi.number().positive().required(),
         sets: Joi.array().required().min(1)
     });
     const { error } = schema.validate(dto)
