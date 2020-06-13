@@ -16,6 +16,7 @@ app.use(express.json())
 app.use(morgan('dev'))
 
 // ROUTES
+app.use('/user', RouterProvider.userRouter())
 app.use('/exercise', RouterProvider.exerciseRouter())
 app.use('/workout', RouterProvider.workoutRouter())
 

@@ -100,7 +100,7 @@ export class BaseRouter {
     return this.router
   }
 
-  static getInstance(businessModel, repository, logger) {
+  static newInstance(businessModel, repository, logger) {
     return new BaseRouter(businessModel, repository, logger);
   }
 }

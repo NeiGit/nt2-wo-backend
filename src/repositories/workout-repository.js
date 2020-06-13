@@ -28,7 +28,7 @@ async function deleteById(_id) {
 async function update(model) {
     try {
         const workout = await find(model._id)
-        const {title, rounds, sets} = workout
+        const {title, rounds, sets} = model
 
         workout.title = title
         workout.rounds = rounds
