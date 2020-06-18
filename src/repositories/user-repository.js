@@ -1,19 +1,35 @@
 import {Logger} from 'neilog'
 import Error from '../services/errorBuilder.js'
-import User from '../persistance-models/user-model.js'
+import UserDB from '../persistance-models/user-model.js'
+import {User} from '../business-models/user.js'
 
 const logger = new Logger()
 
 function find(_id) {
-    return User.findById(_id)
+    return UserDB.findById(_id)
 }
 
 function listByName(query) {
-    return User.find({name: { $regex: '.*' + query + '.*' }})
+    return UserDB.find({name: { $regex: '.*' + query + '.*' }})
 }
 
 function listAll() {
-    return User.find()
+    return UserDB.find()
+}
+
+async function findLogin(userDTO) {
+    const { name, password } = userDTO
+    const user = await UserDB.findOne({ name, password })
+    return new User(user)
+}
+
+async function signup(userDTO) {
+    const { name, password } = userDTO
+    const existing = await UserDB.findOne({ name })
+    if (existing) throw Error(404, `Username ${name} already taken.` + err)
+    else {
+        return await create(userDTO)
+    }
 }
 
 async function deleteById(_id) {
@@ -28,7 +44,7 @@ async function deleteById(_id) {
 async function update(model) {
     try {
         const user = await find(model._id)
-        const {name, password} = model
+        const {name, password} = userDTO
 
         user.name = name
         user.password = password
@@ -42,20 +58,20 @@ async function update(model) {
     }
 }
 
-async function create(model) {
+async function create(userDTO) {
     try {
-        const user = new User()
-        const {name, password} = model
+        const user = new UserDB()
+        const {name, password} = userDTO
 
         user.name = name
         user.password = password
 
         await user.save()
-        return user
+        return new User(user)
     
     } catch (err) {
-        logger.error(`Failed to create user ${model}: `, err)
-        throw Error(400, `Failed to create user ${model}: ` + err)
+        logger.error(`Failed to create user ${userDTO}: `, err)
+        throw Error(400, `Failed to create user ${userDTO}: ` + err)
     }
 }
 
@@ -67,5 +83,7 @@ export default {
     listAll,
     create,
     deleteById,
-    update
+    update,
+    findLogin,
+    signup
 }
