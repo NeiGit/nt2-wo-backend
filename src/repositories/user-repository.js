@@ -17,16 +17,17 @@ function listAll() {
     return UserDB.find()
 }
 
-async function findLogin(userDTO) {
+async function login(userDTO) {
     const { name, password } = userDTO
     const user = await UserDB.findOne({ name, password })
-    return new User(user)
+    if (user) return new User(user)
+    else throw Error(404, "User not found")
 }
 
 async function signup(userDTO) {
     const { name, password } = userDTO
     const existing = await UserDB.findOne({ name })
-    if (existing) throw Error(404, `Username ${name} already taken.` + err)
+    if (existing) throw Error(400, `Username ${name} already taken.`)
     else {
         return await create(userDTO)
     }
@@ -84,6 +85,6 @@ export default {
     create,
     deleteById,
     update,
-    findLogin,
+    login,
     signup
 }

@@ -5,7 +5,7 @@ const Schema = mongoose.Schema
 const workoutSchema = new Schema ({
     title: {type: String, required: true},
     rounds: {type: Number, required: true},
-    userId: {type: String, required: true},
+    user_id: {type: String, required: true},
     sets: []
 }, {timestamps: {createdAt: 'created',  updatedAt: 'updated'}})
 

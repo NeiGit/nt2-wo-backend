@@ -28,7 +28,7 @@ async function deleteById(_id) {
 async function update(model) {
     try {
         const workout = await find(model._id)
-        const {title, rounds, sets} = model
+        const {title, rounds, sets, user_id} = model
 
         workout.title = title
         workout.rounds = rounds
@@ -47,8 +47,9 @@ async function update(model) {
 async function create(model) {
     try {
         const workout = new Workout()
-        const {title, rounds, sets} = model
+        const {title, rounds, sets, user_id} = model
 
+        workout.user_id = user_id
         workout.title = title
         workout.rounds = rounds
         workout.sets = sets || []

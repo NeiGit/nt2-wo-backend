@@ -27,7 +27,7 @@ export class UserRouter extends BaseRouter {
       logger.info(`Requested login for ${JSON.stringify(req.body)}`)
       try {
         await this.validateUserBasicData(req.body);
-        const document = await repo.findLogin(req.body);
+        const document = await repo.login(req.body);
         res.status(200).json(document);
       } catch (err) {
         logger.error(`An error ocurred when trying to login for ${req.body}`, err)
