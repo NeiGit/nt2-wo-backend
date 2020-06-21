@@ -1,5 +1,6 @@
 import Joi from '@hapi/joi'
 import { Set } from './set.js'
+import Error from '../services/errorBuilder.js'
 
 export class Workout {
     constructor(dto) {

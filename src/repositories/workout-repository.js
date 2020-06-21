@@ -16,6 +16,10 @@ function listAll() {
     return Workout.find()
 }
 
+async function findUserWorkouts(user_id) {
+    return Workout.find({user_id})
+}
+
 async function deleteById(_id) {
     try {
         const workout = await find(_id)
@@ -70,5 +74,6 @@ export default {
     listAll,
     create,
     deleteById,
-    update
+    update,
+    findUserWorkouts
 }
