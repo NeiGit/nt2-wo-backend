@@ -6,7 +6,8 @@
   "main": "index.js",
   "scripts": {
     "start": "ENV=prod node -r dotenv/config --experimental-modules src/server.js",
-    "test": "ENV=dev nodemon -r dotenv/config  src/server.js"
+    "test": "ENV=dev nodemon -r dotenv/config  src/server.js",
+    "postinstall": "ENV=prod node -r dotenv/config --experimental-modules src/server.js"
   },
   "keywords": [],
   "author": "",
